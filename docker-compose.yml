@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  mppbackend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/srv/app/
+    ports:
+      - '1338:1337'
+    depends_on:
+      - db
+    env_file:
+      - .env
+    links:
+      - 'db:db'
+  db:
+    image: postgres:latest
+    restart: always
+    ports:
+      - '5433:5432'
+    environment:
+      POSTGRES_DB: mpp
+      POSTGRES_USER: mpp
+      POSTGRES_PASSWORD: password
