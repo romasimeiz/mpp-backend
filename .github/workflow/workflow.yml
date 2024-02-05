@@ -1,0 +1,20 @@
+name: Run validation
+branches: [master]
+on: [pull_request]
+jobs:
+  - test_build:
+      runs-on: ubuntu-latest
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v2
+
+        - name: Install npm
+          run: |
+            npm install
+        - name: Run tests
+          run: |
+            npm run test
+
+        - name: Build docker image
+          run: |
+            docker build mpp -t new-tag

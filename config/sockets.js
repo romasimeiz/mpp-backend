@@ -77,5 +77,5 @@ module.exports.sockets = {
   ***************************************************************************/
 
   // grant3rdPartyCookie: true,
-  onlyAllowOrigins: ["https://www.mydeployedapp.com", "https://mydeployedapp.com"]
+  onlyAllowOrigins: ['https://www.mydeployedapp.com', 'https://mydeployedapp.com']
 };
