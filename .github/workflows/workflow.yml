@@ -19,5 +19,7 @@ jobs:
           npm run test
 
       - name: Build docker image
-        run: |
-          run: docker build . --file Dockerfile --tag image:$(date +%s)
+        uses: docker/build-push-action@v5
+        with:
+          push: false
+          tags: image:$(date +%s)
