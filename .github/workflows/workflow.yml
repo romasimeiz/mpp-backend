@@ -17,9 +17,22 @@ jobs:
       - name: Run tests
         run: |
           npm run test
-
+      - name: Docker meta
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          tags: |
+            type=schedule
+            type=ref,event=branch
+            type=ref,event=pr
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=semver,pattern={{major}}
+            type=sha
       - name: Build docker image
         uses: docker/build-push-action@v5
         with:
+          context: .
           push: false
-          tags: image:$(date +%s)
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
